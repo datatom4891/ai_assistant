@@ -1,0 +1,7 @@
+langgraph 
+langchain-openai 
+langchain-tavily 
+tiktoken
+jupyter
+python_dotenv
+langchain-chroma
