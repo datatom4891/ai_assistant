@@ -5,3 +5,4 @@ tiktoken
 jupyter
 python_dotenv
 langchain-chroma
+langchain-community
