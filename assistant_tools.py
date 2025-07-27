@@ -26,7 +26,7 @@ def format_retrieved_tavily_docs(docs):
 
 
 @tool
-def save_recall_memory(memory: str, config: RunnableConfig) -> str:
+def save_user_core_memory(memory: str, config: RunnableConfig) -> str:
     """Save memory to vectorstore for later semantic retrieval."""
     user_id = get_user_id(config)
     document = Document(page_content=memory, id=str(uuid.uuid4()), metadata={"user_id": user_id})
@@ -34,7 +34,7 @@ def save_recall_memory(memory: str, config: RunnableConfig) -> str:
     return memory
 
 @tool
-def search_recall_memories(query:str, config: RunnableConfig) -> List[str]:
+def search_user_core_memories(query:str, config: RunnableConfig) -> List[str]:
     """Search for relevant memories."""
     
     user_id = get_user_id(config)
@@ -42,10 +42,10 @@ def search_recall_memories(query:str, config: RunnableConfig) -> List[str]:
     return [document.page_content for document in documents]
 
 @tool
-def call_tavily(question):
+def tavily_search(question):
     """Uses Tavily to answer questions the LLM can't answer"""
 
-    retriever = TavilySearchAPIRetriever(k=3)
+    retriever = TavilySearchAPIRetriever(k=1)
     llm = ChatOpenAI(model="gpt-4o-mini")
 
     chain = (
@@ -56,3 +56,7 @@ def call_tavily(question):
     )
     response = chain.invoke(question)
     return response
+
+tools = [save_user_core_memory, 
+         search_user_core_memories, 
+         tavily_search]
