@@ -3,3 +3,6 @@ requirements.txt
 .env
 .venv
 Kalex Test 1.ipynb
+ltm_chroma_db
+.ipynb_checkpoints
+.DS_Store
