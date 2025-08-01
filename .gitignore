@@ -5,3 +5,4 @@ requirements.txt
 Kalex Test 1.ipynb
 .ipynb_checkpoints
 .DS_Store
+ltm_chroma_db
